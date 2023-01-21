@@ -1,8 +1,0 @@
-node_modules
-bakery
-
-Pipfile
-Pipfile.lock
-package-lock.json
-
-**/*.html
