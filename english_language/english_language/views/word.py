@@ -1,6 +1,10 @@
+from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from english_language.models.word import Word
+from english_language.rest.serializers.word import WordDetailSerializer
 
 
 class WordListView(GenericAPIView):
@@ -12,3 +16,12 @@ class WordListView(GenericAPIView):
     def get(self, request, *args, **kwargs):
         context = {'results': []}
         return Response(context)
+
+
+class WordCreateView(APIView):
+    def post(self, request):
+        serializer = WordDetailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

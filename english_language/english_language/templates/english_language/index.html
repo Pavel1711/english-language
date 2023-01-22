@@ -1,8 +1,6 @@
-{% extends 'english_language/base.html' %}
-{% load static %}
-
-{% block content %}
-    <div id="main"></div>
+{% extends 'english_language/base.html' %} {% load static %} {% block content %}
+{{response}}
+<div id="main"></div>
+{% endblock %} {% block extrascript %}
+<script src="{% static 'js/main.bundle.js' %}"></script>
 {% endblock %}
-
-{% block extrascript %}<script src="{% static 'js/main.bundle.js' %}"></script>{% endblock %}

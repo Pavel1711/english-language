@@ -7,6 +7,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('english_language.urls.pages')),
+    path('api/', include('english_language.urls.rest-api')),
 ]
 
 if settings.DEBUG:
