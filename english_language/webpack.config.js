@@ -38,11 +38,11 @@ const filename = (ext) => {
   return `[name].bundle.${ext}`
 };
 
-const APPS_PATH = './frontend/src/apps';
+const APPS_PATH = './frontend/src';
 
 module.exports = {
   entry: {
-    main: path.resolve(__dirname, `${APPS_PATH}/main`, 'main.js'),
+    index: path.resolve(__dirname, APPS_PATH, 'index.js'),
   },
   output: {
     filename: filename('js'),
@@ -51,14 +51,14 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     modules: [path.resolve(node_modules_path)],
-    extensions: ['js']
+    extensions: ['js', 'jsx']
   },
   optimization: optimization(),
   module: {
     rules: [
       {
         // JavaScript
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         include: [path.resolve(__dirname, './frontend/src')],
         use: ['babel-loader'],
       },
