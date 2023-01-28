@@ -53,6 +53,9 @@ module.exports = {
     modules: [path.resolve(node_modules_path)],
     extensions: ['js', 'jsx']
   },
+  resolveLoader: {
+    modules: [path.resolve(node_modules_path)],
+  },
   optimization: optimization(),
   module: {
     rules: [

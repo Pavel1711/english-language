@@ -23,8 +23,8 @@ class Word(models.Model):
         verbose_name='Неправильный ответ', default=0)
     type = models.CharField(
         verbose_name='Тип', choices=WORD_TYPES, max_length=64, default=NOUN)
-    wrong_form = models.CharField(
-        verbose_name='Неправильная форма', blank=True, null=True, max_length=64)
+    past_form = models.CharField(
+        verbose_name='Прошедшая форма', blank=True, null=True, max_length=64)
 
     class Meta:
         verbose_name = 'Слово'

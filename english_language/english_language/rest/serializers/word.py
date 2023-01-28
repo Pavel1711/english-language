@@ -6,7 +6,7 @@ class WordDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
         fields = ['text', 'translation', 'right_answer',
-                  'wrong_answer', 'type', 'wrong_form']
+                  'wrong_answer', 'type', 'past_form']
 
 
 class WordListSerializer(serializers.ModelSerializer):
