@@ -20,10 +20,17 @@ class WordListView(GenericAPIView):
 
 class WordCreateView(APIView):
     def post(self, request):
-        serializer = WordDetailSerializer(data=request.data)
+        data = request.data
+        serializer = WordDetailSerializer(data=data)
         if serializer.is_valid():
-            if Word.objects.filter(text=request.data['text']).exists() == True:
-                return Response({'text': 'Данное слово/фраза уже существует'}, status=status.HTTP_400_BAD_REQUEST)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            try:
+                word = Word.objects.get(text=data['text'])
+                if data['translation'] in word.translation:
+                    return Response({'text': 'Данное слово/фраза уже существует'}, status=status.HTTP_400_BAD_REQUEST)
+                word.translation = f"{word.translation}, {data['translation']}"
+                word.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Word.DoesNotExist:
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
