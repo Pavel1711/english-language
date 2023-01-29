@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+import { navigation } from '../constants/nav.js';
 
 const NavBar = () => {
   return (
@@ -6,12 +8,13 @@ const NavBar = () => {
       <div className="container-fluid">
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a className={`nav-link ${window.location.pathname === '/' ? 'active' : ''}`} aria-current="page" href="/">Home</a>
-            </li>
-            <li className="nav-item">
-              <a className={`nav-link ${window.location.pathname === '/create/word/' ? 'active' : ''}`} href="/create/word/">Создать</a>
-            </li>
+            {navigation.map((item) => (
+              <li className="nav-item" key={item.title}>
+                <a className={classNames('nav-link', {
+                  'active': window.location.pathname === item.path
+                })} aria-current="page" href={item.path}>{item.title}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

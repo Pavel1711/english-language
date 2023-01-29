@@ -1,13 +1,18 @@
 from rest_framework import status
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from english_language.models.word import Word
-from english_language.rest.serializers.word import WordDetailSerializer
+from english_language.rest.serializers.word import WordListSerializer, WordDetailSerializer
 
 
-class WordListView(GenericAPIView):
+class WordListView(ListAPIView):
+    serializer_class = WordListSerializer
+    queryset = Word.objects.all()
+
+
+class WordSmartListView(ListAPIView):
     model_class = Word
 
     def get_queryset(self):

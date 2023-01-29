@@ -4048,6 +4048,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _constants_nav_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants/nav.js */ "./frontend/src/constants/nav.js");
+
+
 
 var NavBar = function NavBar() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
@@ -4059,20 +4064,58 @@ var NavBar = function NavBar() {
     id: "navbarSupportedContent"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
     className: "navbar-nav me-auto mb-2 mb-lg-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-    className: "nav-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    className: "nav-link ".concat(window.location.pathname === '/' ? 'active' : ''),
-    "aria-current": "page",
-    href: "/"
-  }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-    className: "nav-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    className: "nav-link ".concat(window.location.pathname === '/create/word/' ? 'active' : ''),
-    href: "/create/word/"
-  }, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C"))))));
+  }, _constants_nav_js__WEBPACK_IMPORTED_MODULE_2__.navigation.map(function (item) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+      className: "nav-item",
+      key: item.title
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('nav-link', {
+        'active': window.location.pathname === item.path
+      }),
+      "aria-current": "page",
+      href: item.path
+    }, item.title));
+  })))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavBar);
+
+/***/ }),
+
+/***/ "./frontend/src/constants/nav.js":
+/*!***************************************!*\
+  !*** ./frontend/src/constants/nav.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "navigation": () => (/* binding */ navigation)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _pages_Create_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/Create.jsx */ "./frontend/src/pages/Create.jsx");
+/* harmony import */ var _pages_Index_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/Index.jsx */ "./frontend/src/pages/Index.jsx");
+/* harmony import */ var _pages_Training_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/Training.jsx */ "./frontend/src/pages/Training.jsx");
+/* harmony import */ var _components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/NavBar.jsx */ "./frontend/src/components/NavBar.jsx");
+
+
+
+
+
+var navigation = [{
+  path: '/',
+  title: 'Главная',
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Index_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null))
+}, {
+  path: '/trainer/',
+  title: 'Тренажер',
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Training_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null))
+}, {
+  path: '/create/word/',
+  title: 'Создать',
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Create_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null))
+}];
 
 /***/ }),
 
@@ -4145,7 +4188,6 @@ var Create = function Create() {
       }
     });
   };
-  console.log("errors==", errors);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     id: "create",
     className: "container d-flex flex-column align-items-center justify-content-center"
@@ -4231,6 +4273,57 @@ var Index = function Index() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "index");
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Index);
+
+/***/ }),
+
+/***/ "./frontend/src/pages/Training.jsx":
+/*!*****************************************!*\
+  !*** ./frontend/src/pages/Training.jsx ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var Training = function Training() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    words = _useState2[0],
+    setWords = _useState2[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    getWords();
+  }, []);
+  var getWords = function getWords() {
+    fetch('/api/word/all/').then(function (response) {
+      var statusCode = response.status;
+      var data = response.json();
+      return Promise.all([statusCode, data]);
+    }).then(function (result) {
+      var statusCode = result[0];
+      var data = result[1];
+      if ([200, 201].includes(statusCode)) {
+        setWords(data);
+      }
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    id: "create",
+    className: "container d-flex flex-column align-items-center justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", {
+    className: "mb-5"
+  }, "\u0422\u0440\u0435\u043D\u0430\u0436\u0435\u0440"));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Training);
 
 /***/ }),
 
@@ -40470,27 +40563,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _pages_Create_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/Create.jsx */ "./frontend/src/pages/Create.jsx");
-/* harmony import */ var _pages_Index_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Index.jsx */ "./frontend/src/pages/Index.jsx");
-/* harmony import */ var _components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/NavBar.jsx */ "./frontend/src/components/NavBar.jsx");
-
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _constants_nav_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants/nav.js */ "./frontend/src/constants/nav.js");
 
 
 
 
 var container = document.getElementById('index');
 var root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(container);
-var router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.createBrowserRouter)([{
-  path: "/",
-  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null))
-}, {
-  path: "/create/word",
-  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Create_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null))
-}]);
-root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.RouterProvider, {
+var router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.createBrowserRouter)(_constants_nav_js__WEBPACK_IMPORTED_MODULE_2__.navigation);
+root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.RouterProvider, {
   router: router
 }));
 })();

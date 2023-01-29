@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import getCookie from '../utils/getCookie.js';
 
 const Create = () => {
-    const text = useRef(null);
-    const translation = useRef(null);
-    const pastForm = useRef(null);
-		const [type, setType] = useState("noun");
-		const [errors, setErrors] = useState(null);
+	const text = useRef(null);
+	const translation = useRef(null);
+	const pastForm = useRef(null);
+	const [type, setType] = useState("noun");
+	const [errors, setErrors] = useState(null);
 
     const sendForm = () => {
 			setErrors(null);
@@ -50,8 +50,6 @@ const Create = () => {
 					}
 				})
     }
-
-		console.log("errors==", errors)
 
     return (
         <div id="create" className='container d-flex flex-column align-items-center justify-content-center'>
