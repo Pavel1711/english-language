@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -39,3 +39,23 @@ class WordCreateView(APIView):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class WordEditView(GenericAPIView):
+    serializer_class = WordDetailSerializer
+
+    lookup_url_kwarg = 'word_id'
+    queryset = Word.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        data = request.data.copy()
+        word = self.get_object()
+        if 'right_answer' in data:
+            word.right_answer = word.right_answer + 1
+        elif 'wrong_answer' in data:
+            word.wrong_answer = word.wrong_answer + 1
+        word.save()
+        return Response(
+            {'success': 'Данные успешно обновлены'},
+            status=status.HTTP_200_OK
+        )

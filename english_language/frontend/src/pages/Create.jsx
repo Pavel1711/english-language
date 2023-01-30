@@ -75,6 +75,7 @@ const Create = () => {
                         <option value="noun">Существительное</option>
                         <option value="adjective">Прилагательное</option>
                         <option value="verb">Глагол</option>
+												<option value="adverb">Наречие</option>
                         <option value="phrase">Фраза</option>
                     </select>
                 </div>

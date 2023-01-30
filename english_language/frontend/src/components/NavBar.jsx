@@ -11,7 +11,7 @@ const NavBar = () => {
             {navigation.map((item) => (
               <li className="nav-item" key={item.title}>
                 <a className={classNames('nav-link', {
-                  'active': window.location.pathname === item.path
+                  'fw-bold active': window.location.pathname === item.path
                 })} aria-current="page" href={item.path}>{item.title}</a>
               </li>
             ))}

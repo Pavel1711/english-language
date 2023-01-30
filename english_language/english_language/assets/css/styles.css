@@ -15,3 +15,10 @@
   color: var(--bs-danger);
   font-size: 12px;
 }
+#training {
+  gap: 16px;
+}
+#training span {
+  font-size: 16px;
+  cursor: pointer;
+}

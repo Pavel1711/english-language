@@ -4070,7 +4070,7 @@ var NavBar = function NavBar() {
       key: item.title
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('nav-link', {
-        'active': window.location.pathname === item.path
+        'fw-bold active': window.location.pathname === item.path
       }),
       "aria-current": "page",
       href: item.path
@@ -4237,6 +4237,8 @@ var Create = function Create() {
   }, "\u041F\u0440\u0438\u043B\u0430\u0433\u0430\u0442\u0435\u043B\u044C\u043D\u043E\u0435"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("option", {
     value: "verb"
   }, "\u0413\u043B\u0430\u0433\u043E\u043B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("option", {
+    value: "adverb"
+  }, "\u041D\u0430\u0440\u0435\u0447\u0438\u0435"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("option", {
     value: "phrase"
   }, "\u0424\u0440\u0430\u0437\u0430"))), type === "verb" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", {
     htmlFor: "past-form",
@@ -4290,8 +4292,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils_getCookie_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getCookie.js */ "./frontend/src/utils/getCookie.js");
 
 
 
@@ -4300,6 +4301,14 @@ var Training = function Training() {
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     words = _useState2[0],
     setWords = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+    count = _useState4[0],
+    setCount = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+    showRightAnswer = _useState6[0],
+    setShowRightAnswer = _useState6[1];
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getWords();
   }, []);
@@ -4316,12 +4325,63 @@ var Training = function Training() {
       }
     });
   };
+  var nextWord = function nextWord(type) {
+    var token = (0,_utils_getCookie_js__WEBPACK_IMPORTED_MODULE_2__["default"])('csrftoken');
+    var data = {};
+    if (type === 'wrong') {
+      data.wrong_answer = true;
+    } else if (type === 'right') {
+      data.right_answer = true;
+    }
+    fetch("/api/word/edit/".concat(words[count].id, "/"), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRFToken': token
+      },
+      body: JSON.stringify(data)
+    }).then(function (response) {
+      var statusCode = response.status;
+      var data = response.json();
+      return Promise.all([statusCode, data]);
+    }).then(function (result) {
+      var statusCode = result[0];
+      var data = result[1];
+      if ([200, 201].includes(statusCode)) {
+        setCount(count + 1);
+        setShowRightAnswer(false);
+      } else {
+        console.error(data);
+      }
+    });
+  };
+  if (!words.length) return null;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-    id: "create",
+    id: "training",
     className: "container d-flex flex-column align-items-center justify-content-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", {
-    className: "mb-5"
-  }, "\u0422\u0440\u0435\u043D\u0430\u0436\u0435\u0440"));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", {
+    className: "mb-4"
+  }, "\u0422\u0440\u0435\u043D\u0430\u0436\u0435\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, count + 1, "/", words.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    className: "fw-bold"
+  }, words[count].text), showRightAnswer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, words[count].translation) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    onClick: function onClick() {
+      return setShowRightAnswer(true);
+    }
+  }, "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u043E\u0442\u0432\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "btn-group mt-3",
+    role: "group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+    className: "btn btn-danger",
+    onClick: function onClick() {
+      return nextWord('wrong');
+    }
+  }, "\u041D\u0435\u0432\u0435\u0440\u043D\u043E"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+    className: "btn btn-success",
+    onClick: function onClick() {
+      return nextWord('right');
+    }
+  }, "\u0412\u0435\u0440\u043D\u043E")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Training);
 

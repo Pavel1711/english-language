@@ -8,11 +8,13 @@ class Word(models.Model):
     NOUN = 'noun'
     ADJECTIVE = 'adjective'
     VERB = 'verb'
+    ADVERB = 'adverb'
     PHRASE = 'phrase'
     WORD_TYPES = (
         (NOUN, 'Существительное'),
         (ADJECTIVE, 'Прилагательное'),
         (VERB, 'Глагол'),
+        (ADVERB, 'Наречие'),
         (PHRASE, 'Фраза'),
     )
     text = models.CharField(verbose_name='Слово', max_length=128)
