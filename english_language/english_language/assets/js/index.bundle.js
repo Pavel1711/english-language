@@ -4152,6 +4152,11 @@ var Create = function Create() {
     _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
     errors = _useState4[0],
     setErrors = _useState4[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    document.addEventListener('keyup', function (event) {
+      if (event.code === 'Enter') sendForm();
+    });
+  }, []);
   var sendForm = function sendForm() {
     setErrors(null);
     var data = {
@@ -4349,7 +4354,11 @@ var Training = function Training() {
       var statusCode = result[0];
       var data = result[1];
       if ([200, 201].includes(statusCode)) {
-        setCount(count + 1);
+        if (count + 1 <= words.length) {
+          setCount(count + 1);
+        } else {
+          window.location.reload();
+        }
         setShowRightAnswer(false);
       } else {
         console.error(data);

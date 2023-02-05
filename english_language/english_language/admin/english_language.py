@@ -4,7 +4,7 @@ from english_language.models import *
 
 class WordAdmin(admin.ModelAdmin):
     base_model = Word
-    list_display = ['text', 'translation', 'type']
+    list_display = ['text', 'translation', 'rating', 'type']
     search_fields = ['text', 'translation']
 
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import getCookie from '../utils/getCookie.js';
 
@@ -8,6 +8,12 @@ const Create = () => {
 	const pastForm = useRef(null);
 	const [type, setType] = useState("noun");
 	const [errors, setErrors] = useState(null);
+
+	useEffect(() => {
+		document.addEventListener( 'keyup', event => {
+			if( event.code === 'Enter' ) sendForm()
+		});
+	}, []);
 
     const sendForm = () => {
 			setErrors(null);

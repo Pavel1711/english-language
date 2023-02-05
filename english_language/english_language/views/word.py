@@ -9,7 +9,7 @@ from english_language.rest.serializers.word import WordListSerializer, WordDetai
 
 class WordListView(ListAPIView):
     serializer_class = WordListSerializer
-    queryset = Word.objects.all()
+    queryset = Word.objects.all().order_by('rating')
 
 
 class WordSmartListView(ListAPIView):
@@ -51,9 +51,9 @@ class WordEditView(GenericAPIView):
         data = request.data.copy()
         word = self.get_object()
         if 'right_answer' in data:
-            word.right_answer = word.right_answer + 1
+            word.rating = word.rating + 1
         elif 'wrong_answer' in data:
-            word.wrong_answer = word.wrong_answer + 1
+            word.rating = word.rating - 1
         word.save()
         return Response(
             {'success': 'Данные успешно обновлены'},

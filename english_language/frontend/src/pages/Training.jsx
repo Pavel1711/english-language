@@ -9,8 +9,8 @@ const Training = () => {
 
   useEffect(() => {
     getWords();
-  }, [])
-
+  }, []);
+  
   const getWords = () => {
     fetch('/api/word/all/')
       .then(response => {
@@ -56,7 +56,11 @@ const Training = () => {
 					const data =  result[1];
 		
 					if ([200, 201].includes(statusCode)){
-            setCount(count + 1);
+            if (count + 1 <= words.length) {
+              setCount(count + 1);
+            } else {
+              window.location.reload();
+            }
             setShowRightAnswer(false);
 					} else {
 						console.error(data);

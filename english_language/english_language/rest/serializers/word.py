@@ -5,8 +5,7 @@ from english_language.models.word import Word
 class WordDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
-        fields = ['text', 'translation', 'right_answer',
-                  'wrong_answer', 'type', 'past_form']
+        fields = ['text', 'translation', 'rating', 'type', 'past_form']
 
 
 class WordListSerializer(serializers.ModelSerializer):
